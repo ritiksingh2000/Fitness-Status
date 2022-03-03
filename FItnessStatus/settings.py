@@ -25,7 +25,7 @@ SECRET_KEY = '9f)))&_i9=$bid4&n!4^6*^y8u3g3z5m%#y9g-0q4wt38cmgi%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["fitness-status-ritik-singh.herokuapp", "localhost"]
+ALLOWED_HOSTS = ["fitness-status-ritik-singh.herokuapp","fitness-status-ritik-singh.herokuapp.com", "localhost"]
 
 
 # Application definition
