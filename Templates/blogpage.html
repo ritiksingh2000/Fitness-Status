@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="row p-0 m-0">
+    <div class="col-md-2 p-0" style="background-color: #101010;"></div>
+    <div class="col-md-8">
+        <div class="my-2 rounded p-3" style="background-color: #1e1e1e;">
+            <center><img src="{{articlepg.thumbnail.url}}" height="250px" /></center>
+
+            <center>
+                <p class="display-3 text-white my-2">{{articlepg.title}}</p>
+            </center>
+            <center>
+                <small>
+                    <p class="text-white text-muted h6 my-4">By {{articlepg.author}}, {{articlepg.date}}</p>
+                </small>
+            </center>
+        </div>
+        <center>
+            <div class="bg-light p-3 rounded blgpgbdy my-2 mx-2 py-1" style="font-family: Arial; font-size: 15px; font-weight: 400;">{{articlepg.body|safe}}</div>
+        </center>
+    </div>
+    <div class="col-md-2 p-0" style="background-color: #101010;"></div>
+</div>
+
+<div class="container py-3">
+    <div class="row m-0 p-0" style="background-color: rgba(0, 0, 0, 0.6);">
+        <p class="p-sm-2 p-md-5"></p>
+        {% for articles in articles %} {% if articlepg.category == articles.category %}
+        <div class="col-md-4 p-3">
+            <div class="card p-1" style="background-color: rgb(255, 255, 255, 0.9);">
+                <img src="{{articles.thumbnail.url}}" class="card-img-top border border-dark rounded" />
+                <div class="card-body p-1">
+                    <h3 class="h3">{{articles.title}}</h3>
+                    <small class="card-text">{{articles.limit}}</small>
+                </div>
+                <div class="card-body pt-1">
+                    <p>
+                        <small><strong>By : {{articles.author}} | {{articles.date}}</strong></small>
+                    </p>
+                    <a href="{% url 'blogpage' articles.id  %}" class="btn btn-outline-primary btn-block">Read Now</a>
+                </div>
+            </div>
+        </div>
+
+        {% endif %} {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

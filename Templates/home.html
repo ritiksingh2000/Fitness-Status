@@ -1,0 +1,334 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="Hme-Cover text-center">
+  <div class="cover-container d-flex w-100 h-100 pt-0 mx-auto flex-column mb-5">
+    <br />
+    <br />
+    <br />
+    <main role="main " class="cvr-hed inner cover pb-5">
+      <h1 class="display-3 home-hdr-hedd text-white pb-5 mt-md-5">
+        <b>Your Fitness Pal</b>
+      </h1>
+      <p class="lead text-white px-2">
+        We will provide you everything that is required for the improvement of
+        your FITNESS STATUS
+      </p>
+      <br />
+      <div class="row justify-content-center mx-2 pb-5">
+        <p class="col-md-2 col-sm-2 lead py-md-3 mx-md-1">
+          <a href="{% url 'blogs' %}" class="btn btn-lg btn-outline-light"
+            >Read Blogs</a
+          >
+        </p>
+        <p class="col-md-2 col-3 lead py-md-3 mx-md-1">
+          <a href="#BMI-Calculator" class="btn mx-1 btn-lg btn-outline-light"
+            >BMI Calculator</a
+          >
+        </p>
+        <p class="col-md-2 col-3 lead py-md-3 mx-md-1">
+          <a
+            href="{% url 'healthtube' %}"
+            class="btn mx-1 btn-lg btn-outline-light"
+            >Health Tube</a
+          >
+        </p>
+        <p class="col-md-2 col-3 lead py-md-3 mx-md-1">
+          <a href="#calorie-counter" class="btn mx-1 btn-lg btn-outline-light"
+            >Calorie Counter</a
+          >
+        </p>
+      </div>
+      <div class="my-3">
+        {% for message in messages %}
+        <h3 class="text-warning h3 inline" style="display: inline-block">
+          {{message}}
+        </h3>
+        {% endfor %}
+      </div>
+    </main>
+  </div>
+  <section class="choseus-section mt-5 spad text-white home-ico-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-title py-2">
+            <h2 class="display-4">What Fitness Status Offers?</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-3 py-3">
+          <div class="cs-item">
+            <span
+              ><img
+                class="icon-home"
+                src="{% static 'image/blog.png' %}"
+                width="80"
+            /></span>
+            <h4 class="py-2">Fitness Blogs</h4>
+            <p class="lead">
+              Ultimate and unlimited source of Fitness knowledge
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3 py-3">
+          <div class="cs-item">
+            <span
+              ><img
+                class="icon-home"
+                src="{% static 'image/calculator.ico' %}"
+                width="80"
+            /></span>
+            <h4 class="py-2">BMI Calculator</h4>
+            <p class="lead">A BMI to calculate your BMI Score.</p>
+          </div>
+        </div>
+        <div class="col-md-3 py-3">
+          <div class="cs-item">
+            <span
+              ><img
+                class="icon-home"
+                src="{% static 'image/immg.ico' %}"
+                width="80"
+            /></span>
+            <h4 class="py-2">Health Tube</h4>
+            <p class="lead">All Necessary Health Related Videos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<section id="BMI-Calculator" class="bmi-calculator-section spad text-white">
+  <center>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="section-title chart-title">
+            <span class="py-2">Check Your BMI</span>
+            <h2 class="py-2">BMI CALCULATOR CHART</h2>
+          </div>
+          <div class="table table py-2 text-white">
+            <table class="border">
+              <thead>
+                <tr>
+                  <th class="py-2 text-white">Bmi</th>
+                  <th class="py-2 text-white">WEIGHT STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="point text-white">Below 18.5</td>
+                  <td class="text-white">Underweight</td>
+                </tr>
+                <tr>
+                  <td class="point text-white">18.5 - 24.9</td>
+                  <td class="text-white">Healthy</td>
+                </tr>
+                <tr>
+                  <td class="point text-white">25.0 - 29.9</td>
+                  <td class="text-white">Overweight</td>
+                </tr>
+                <tr>
+                  <td class="point text-white">30.0 - and Above</td>
+                  <td class="text-white">Obese</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="section-title chart-calculate-title">
+            <span class="py-2">Check Your BMI</span>
+            <h2 class="py-2">CALCULATE YOUR BMI</h2>
+          </div>
+          <div class="chart-calculate-form">
+            <p>
+              The BMI is a convenient rule of thumb used to broadly categorize a
+              person as underweight, normal weight, overweight, or obese based
+              on tissue mass (muscle, fat, and bone) and height. That
+              categorization is the subject of some debate about where on the
+              BMI scale the dividing lines between categories should be placed.
+              Commonly accepted BMI ranges are underweight (under 18.5 kg/m2),
+              normal weight (18.5 to 25), overweight (25 to 30), and obese (over
+              30).
+            </p>
+            <form action="{% url 'bmi' %}" method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-sm-6 py-2">
+                  <input
+                    type="text"
+                    class="rounded"
+                    placeholder="Height / cm"
+                    name="height"
+                  />
+                </div>
+                <div class="col-sm-6 py-2">
+                  <input
+                    type="text"
+                    class="rounded"
+                    placeholder="Weight / kg"
+                    name="weight"
+                  />
+                </div>
+                <div class="col-sm-6 py-2">
+                  <input
+                    type="text"
+                    class="rounded"
+                    placeholder="Age"
+                    name="age"
+                  />
+                </div>
+                <div class="col-sm-6 py-2">
+                  <input
+                    type="text"
+                    class="rounded"
+                    placeholder="Sex"
+                    name="sex"
+                  />
+                </div>
+                <div class="col-lg-12">
+                  <button
+                    type="submit"
+                    class="mt-4 px-5 btn btn-outline-warning btn-lg"
+                  >
+                    Calculate
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <section
+          id="calorie-counter"
+          class="spad text-white"
+          style="background-color: #101010"
+        >
+          <center>
+            <div class="container">
+              <div>
+                <div class="section-title chart-calculate-title">
+                  <h2 class="py-2">How Much Calories You Need?</h2>
+                </div>
+                <div class="chart-calculate-form">
+                  <p>
+                    A calorie is the amount of heat needed to raise the
+                    temperature of one gram of water by one degree Celsius.
+                    Calories in food provide energy in the form of heat so that
+                    our bodies can function. Our bodies store and "burn"
+                    calories as fuel. Many dieters count calories and try to
+                    decrease caloric intake to lose weight
+                  </p>
+                  <form action="{% url 'calorie' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-sm-6 py-2 px-5">
+                        <div class="form-group">
+                          <label class="lead font-weight-bold"
+                            >Your Gender</label
+                          >
+                          <select
+                            selected="selected"
+                            class="form-control"
+                            id="gender"
+                            name="gender"
+                          >
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 py-2 px-5">
+                        <div class="form-group">
+                          <label class="lead font-weight-bold">Age Group</label>
+                          <select
+                            selected="selected"
+                            class="form-control"
+                            id="age"
+                            name="age"
+                          >
+                            <option value="4-8">4-8</option>
+                            <option value="9-13">9-13</option>
+                            <option value="14-18">14-18</option>
+                            <option value="19-30">19-30</option>
+                            <option value="31-50">31-50</option>
+                            <option value="Above 51">Above 51</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 py-2 mx-auto px-5">
+                        <div class="form-group">
+                          <label class="lead font-weight-bold"
+                            >Life Style</label
+                          >
+                          <select
+                            selected="selected"
+                            class="form-control"
+                            id="lifestyle"
+                            name="lifestyle"
+                          >
+                            <option value="Sedentary">Sedentary</option>
+                            <option value="Moderately Active">
+                              Moderately Active
+                            </option>
+                            <option value="Active">Active</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <button
+                          type="submit"
+                          class="mb-4 px-5 btn btn-outline-warning btn-lg"
+                        >
+                          Calculate
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <div
+                class="row justify-content-center m-0 p-3"
+                style="background-color: rgb(0, 0, 0, 0.5)"
+              >
+                <div class="col-sm-10 col-md-8 p-0 m-0">
+                  <div class="card text-center my-3 bg-light">
+                    <div class="card-header">
+                      <h3 class="text-center text-dark">
+                        Become Part Of Fitness Status
+                      </h3>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title py-3 text-dark text-center">
+                        Enter Your E-mail For Future Updates.
+                      </h5>
+                      <form action="{% url 'subs' %}" method="post">
+                        {% csrf_token %}
+                        <input
+                          type="email"
+                          class="px-2 py-1 border border-dark rounded my-2"
+                          required
+                          name="email"
+                          placeholder="Your E-Mail"
+                        />
+                        <button type="submit" class="btn btn-dark my-2">
+                          Submit
+                        </button>
+                      </form>
+                    </div>
+                    <div class="card-footer text-muted">
+                      Your Data Is In Safe Hands.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endblock %}
+            </div>
+          </center>
+        </section>
+      </div>
+    </div>
+  </center>
+</section>

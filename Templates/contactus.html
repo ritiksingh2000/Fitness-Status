@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section>
+    <div class="blg-hedd text-white">
+        <div class="jumbotron px-md-5 jumbotron-fluid py-0 text-white m-0" style="background-color: #1e1e1e;">
+            <div class="row m-0 justify-content-center">
+                <div class="col-12 p-2 m-0 text-center">
+                    <h1 class="display-3">Contact Now</h1>
+                    <p class="lead py-2">Clear Your Doubts</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container my-md-3 px-5 rounded" style="background-color: #101010;">
+        {% for message in messages %}
+        <h4 class="text-warning text-center px-md-5 h3">{{ message }}</h4>
+        {% endfor %}
+
+        <form id="contact-form" class="px-md-5" name="contact-form" action="contact" method="POST">
+            {% csrf_token %}
+            <!--Grid row-->
+            <div class="row my-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="py-2 px-3 input-group-text text-white font-weight-bold mb-auto" style="background-color: #1f1f1f;">Full Name</span>
+                    </div>
+                    <input required type="Text" placeholder="Your Name" value="{{user.first_name}} {{user.last_name}}" id="nam" name="nam" class="py-2 px-3 form-control text-dark" />
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="py-2 px-3 input-group-text text-white font-weight-bold mb-auto" style="background-color: #1f1f1f;">Email</span>
+                    </div>
+                    <input required type="email" placeholder="Your E-Mail" value="{{user.email}}" id="email" name="email" class="py-2 px-3 form-control" />
+                </div>
+            </div>
+
+            <!--Grid row-->
+            <div class="row my-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="py-2 px-3 input-group-text text-white font-weight-bold mb-auto" style="background-color: #1f1f1f;">Subject</span>
+                    </div>
+                    <input type="text" required placeholder="Message Subject" id="subject" name="subject" class="form-control py-2 px-3" />
+                </div>
+            </div>
+            <!--Grid row-->
+            <!--Grid row-->
+            <div class="row my-3">
+                <!--Grid column-->
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text p-4 text-white font-weight-bold pb-auto" style="background-color: #1f1f1f;">Message</span>
+                    </div>
+                    <textarea class="form-control p-3" type="text" required placeholder="Your Message" id="message" name="message" rows="9"></textarea>
+                </div>
+            </div>
+            <!--Grid row-->
+            <div class="text-center text-md-left my-2">
+                <center><input class="btn btn-warning btn-lg text-dark px-5 my-2" value="Send" type="submit" /></center>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

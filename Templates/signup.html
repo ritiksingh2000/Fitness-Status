@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="blg-hedd text-white">
+   <div class="jumbotron px-md-5 jumbotron-fluid py-0 text-white m-0" style="background-color: #1e1e1e">
+      <div class="row m-0 justify-content-center">
+         <div class="col-12 p-2 m-0 text-center">
+            <h1 class="display-3">Register Now</h1>
+            <p class="lead py-2">Be a part of <b>FITNESS STATUS</b></p>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="container my-md-3 p-5 rounded" style="background-color: #101010" >
+   {% for message in messages %}
+   <h4 class="text-warning text-center px-md-5 h3">{{ message }}</h4>
+   {% endfor %}
+   <form role="form" action="regestration" method="post">
+      {% csrf_token %}
+      <div class="row">
+         <div class="col-xs-6 col-sm-6 col-md-6 p-3">
+            <div class="form-group">
+               <input type="text" name="first_name" required id="first_name" class="form-control input-lg p-3" placeholder="First Name">
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-6 col-md-6 p-3">
+            <div class="form-group">
+               <input type="text" name="last_name" required id="last_name" class="form-control input-lg p-3" placeholder="Last Name">
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="form-group col-xs-6 col-sm-6 col-md-6 p-3">
+            <input type="text" name="username" required id="username" class="form-control input-lg p-3" placeholder="Username">
+         </div>
+         <div class="form-group col-xs-6 col-sm-6 col-md-6 p-3">
+            <input type="email" name="email" required id="email" class="form-control input-lg p-3" placeholder="Email Address">
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xs-6 col-sm-6 col-md-6 p-3">
+            <div class="form-group">
+               <input type="password" required name="password1" id="password" pattern=".{8,12}" class="form-control input-lg p-3" placeholder="Password" minlength="8">
+            </div>
+         </div>
+         <div class="col-xs-6 col-sm-6 col-md-6 p-3">
+            <div class="form-group">
+               <input type="password" name="password2" id="password_confirmation" required class="form-control input-lg p-3" placeholder="Confirm Password" minlength="8">
+            </div>
+         </div>
+      </div>
+      <center>
+         <input type="submit" value="Register" class="btn btn-warning btn-lg my-4">
+      </center>
+   </form>
+</div>
+{% endblock %}

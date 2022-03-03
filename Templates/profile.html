@@ -1,0 +1,220 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section>
+    <div class="container">
+        <ul class="nav nav-tabs my-3 p-2 justify-content-center" style="background-color: #1e1e1e;" id="myTab" role="tablist">
+            <li class="nav-item p-2">
+                <a class="nav-link rounded active text-warning font-weight-bold" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+            </li>
+            <li class="nav-item p-2">
+                <a class="nav-link rounded text-warning font-weight-bold" id="add_blog-tab" data-toggle="tab" href="#add_blog" role="tab" aria-controls="add_blog" aria-selected="true">Add Blog</a>
+            </li>
+            <li class="nav-item p-2">
+                <a class="nav-link rounded text-warning font-weight-bold" id="your_blog-tab" data-toggle="tab" href="#your_blog" role="tab" aria-controls="your_blog" aria-selected="true">Your Blog</a>
+            </li>
+            <li class="nav-item p-2">
+                <a class="nav-link rounded text-warning font-weight-bold" id="suggest-tab" data-toggle="tab" href="#suggest" role="tab" aria-controls="suggest" aria-selected="true">Suggest Video</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            {% for message in messages %}
+            <center><h3 class="text-warning mx-auto h3 inline p-md-4 p-sm-2" style="display: inline-block;">{{message}}</h3></center>
+            {% endfor %}
+            <!--Profile-->
+            <div class="tab-pane fade show active mb-5" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="row m-0 p-md-3 p-sm-2 justify-content-center rounded" style="background-color: #1e1e1e;">
+                    <div class="col-11 px-sm-2 px-md-4 mb-3 rounded" style="background-color: rgba(0, 0, 0, 0.6);">
+                        <p class="display-4 text-white text-center">All We Know About You.</p>
+                    </div>
+                    <div class="col-md-6 my-2 mx-0 p-2">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-dark text-white font-weight-bold px-md-3">First Name</div>
+                            </div>
+                            <input type="text" class="form-control bg-dark text-white" readonly="" id="inlineFormInputGroup" value="{{user.first_name}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 my-2 mx-0 p-2">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-dark text-white font-weight-bold px-md-3">Last Name</div>
+                            </div>
+                            <input type="text" class="form-control bg-dark text-white" readonly="" id="inlineFormInputGroup" value="{{user.last_name}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 my-2 mx-0 p-2">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-dark text-white font-weight-bold px-md-3">Email Id</div>
+                            </div>
+                            <input type="text" class="form-control bg-dark text-white" readonly="" id="inlineFormInputGroup" value="{{user.email}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 my-2 mx-0 p-2">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-dark text-white font-weight-bold px-md-3">Username</div>
+                            </div>
+                            <input type="text" class="form-control bg-dark text-white" readonly="" id="inlineFormInputGroup" value="{{user.username}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 my-2 mx-0 p-2">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-dark text-white font-weight-bold px-md-3">Joined Fitness Status</div>
+                            </div>
+                            <input type="text" class="form-control bg-dark text-white" readonly="" id="inlineFormInputGroup" value="{{user.date_joined}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Add Blogs-->
+            <div class="tab-pane fade show mb-5" id="add_blog" role="tabpanel" aria-labelledby="add_blog-tab">
+                <div class="row m-0 p-md-4 p-sm-2 justify-content-center rounded" style="background-color: #1e1e1e;">
+                    <div class="col-11 px-sm-2 px-md-4 mb-3 rounded" style="background-color: rgba(0, 0, 0, 0.6);">
+                        <p class="display-4 text-white text-center">Share Your Knowledge Of Fitness.</p>
+                    </div>
+                    <div class="rounded col-12 p-md-4 p-sm-2 text-white form-group" style="background-color: rgba(0, 0, 0, 0.4);">
+                        <form enctype="multipart/form-data" method="POST">
+                            {% csrf_token %} {{form1.media}} {{form1.as_p}}
+                            <div class="mx-auto">
+                                <button type="Submit" class="btn btn-lg text-center my-2 btn-outline-warning px-4">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="rounded col-12 p-md-4 p-sm-2 text-white form-group" style="background-color: rgba(0, 0, 0, 0.4);">
+                        <form enctype="multipart/form-data" method="POST" action="createcatgry">
+                            <div class="col-11 px-sm-2 px-md-4 mb-3 rounded" style="background-color: rgba(0, 0, 0, 0.6);">
+                                <p class="h3 py-4 text-white text-center">Create Your Own Category</p>
+                            </div>
+                            <p class="text-danger p-3 lead">Unnecessary and Inappropriate Categories Will Be Deleted.</p>
+                            {% csrf_token %}
+                            <input required type="Text" size="60" placeholder="Category Name" id="nam" name="category" class="py-2 px-3 form-control text-dark" />
+                            <button type="Submit" class="btn text-center my-2 btn-outline-warning px-4">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--Your Blog-->
+            <div class="tab-pane fade show mb-5" id="your_blog" role="tabpanel" aria-labelledby="your_blog-tab">
+                <div class="row m-0 p-md-4 p-sm-2 justify-content-center rounded" style="background-color: #1e1e1e;">
+                    <div class="col-11 px-sm-2 px-md-4 mb-3 rounded" style="background-color: rgba(0, 0, 0, 0.6);">
+                        <p class="display-4 text-white text-center">Blogs You Shared</p>
+                    </div>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Avtion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for userarticles in userarticles %} {% if user.email == userarticles.author_email %}
+                            <tr>
+                                <th scope="row">&#9702;</th>
+                                <td><a class="text-white" href="{% url 'blogpage' userarticles.id  %}">{{userarticles.title}}</a></td>
+                                <td>{{userarticles.category}}</td>
+                                <td>{{userarticles.date}}</td>
+                                <td><a href="{% url 'delete' userarticles.id %}" class="btn btn-outline-danger">Delete</a></td>
+                            </tr>
+                            {% endif %} {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--Suggest Video-->
+            <div class="tab-pane fade show" id="suggest" role="tabpanel" aria-labelledby="suggest-tab">
+                <div class="row m-0 p-md-4 p-sm-2 justify-content-center rounded" style="background-color: #1e1e1e;">
+                    <div class="col-11 px-sm-2 px-md-4 mb-3 rounded" style="background-color: rgba(0, 0, 0, 0.6);">
+                        <p class="display-4 text-white text-center">Suggest A Youtube Fitness Video</p>
+                        <center><small class="mb-2 pb-2 mx-auto text-warning text-center">Video will be added only if the content is related and not inappropriate.</small></center>
+                        <br />
+                    </div>
+
+                    <form class="rounded col-12 needs-validation p-md-3" style="background-color: rgba(0, 0, 0, 0.4);" method="POST" action="{% url 'share' %}" novalidate>
+                        {% csrf_token %}
+                        <div class="row justify-content-center m-0 p-2">
+                            <div class="col-md-8 my-3 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-white px-md-5" style="background-color: #101010;" id="validationTooltipUsernamePrepend">Video Name</span>
+                                </div>
+                                <input type="text" class="form-control" id="validationTooltipUsername" name="v_name" placeholder="Video Name" aria-describedby="validationTooltipUsernamePrepend" required />
+                            </div>
+                            <div class="col-md-8 my-3 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-white px-md-5" style="background-color: #101010;" id="validationTooltipUsernamePrepend">Video Link</span>
+                                </div>
+                                <input type="text" class="form-control" id="validationTooltipUsername" name="v_link" placeholder="Video Link" aria-describedby="validationTooltipUsernamePrepend" required />
+                            </div>
+                            <div class="col-md-8 my-3 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-white px-md-5" style="background-color: #101010;" id="validationTooltipUsernamePrepend">Channel Name</span>
+                                </div>
+                                <input type="text" class="form-control" id="validationTooltipUsername" name="c_name" placeholder="Channel Name" aria-describedby="validationTooltipUsernamePrepend" required />
+                            </div>
+                            <div class="col-md-8 my-3 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-white px-md-5" style="background-color: #101010;" id="validationTooltipUsernamePrepend">Channel Link</span>
+                                </div>
+                                <input type="text" class="form-control" id="validationTooltipUsername" name="c_link" placeholder="Channel Link" aria-describedby="validationTooltipUsernamePrepend" required />
+                            </div>
+                            <div class="col-md-8 my-3 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-white px-md-5" style="background-color: #101010;" id="validationTooltipUsernamePrepend">Video Category</span>
+                                </div>
+                                <select name="category" class="custom-select">
+                                    <option disabled>Choose A Category</option>
+                                    {% for vcatgry in vcatgry %}
+                                    <option value="{{vcatgry.Category}}">{{vcatgry.Category}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-8 my-3 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-white px-md-5" style="background-color: #101010;" id="validationTooltipUsernamePrepend">Added By</span>
+                                </div>
+                                <input type="text" class="form-control" id="validationTooltipUsername" name="by" readonly value="{{user.email}}" aria-describedby="validationTooltipUsernamePrepend" required />
+                            </div>
+
+                            <div class="col-md-8 mx-auto">
+                                <center><button type="Submit" class="btn btn-lg text-center btn-outline-warning px-4">Submit</button></center>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-11 px-sm-2 pb-4 px-md-4 mx-auto my-4 rounded" style="background-color: rgba(0, 0, 0, 0.6);">
+                        <p class="display-4 text-white text-center">Videos You Shared</p>
+
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Channel</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Category</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for shared in shared %} {% if user.email == shared.Added_By %}
+                                <tr>
+                                    <th scope="row">&#9702;</th>
+                                    <td><a class="text-white" href="{{shared.Video_Link}}">{{shared.Video_Name}}</a></td>
+                                    <td>{{shared.Channel_Name}}</td>
+                                    <td>{{shared.date}}</td>
+                                    <td>{{shared.Category}}</td>
+                                </tr>
+                                {% endif %} {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}
+    </div>
+</section>

@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container-fluid p-0 m-0">
+    <div class="blg-hedd text-white">
+        <div class="jumbotron px-md-5 jumbotron-fluid py-0 text-white m-0" style="background-color: #1e1e1e;">
+            <div class="row m-0">
+                <div class="col-12 p-2 m-0 text-center">
+                    <h1 class="display-3">HealthTube</h1>
+                    <p class="lead py-2">Collection Of Necessar Healthy Videos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-12 p-0 m-0 p-md-4">
+        <div class="card" style="background-color: rgba(0, 0, 0, 0.3);">
+            <p class="text-warning lead text-center card-header" style="background-color: rgba(0, 0, 0, 0.3);">Select A Video Category</p>
+            <ul class="nav nav-pills my-2 justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item p-2">
+                    <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>
+                </li>
+                {% for category in category %}
+                <li class="nav-item p-2">
+                    <a class="nav-link" id="pills-{{category.Category}}-tab" data-toggle="pill" href="#pills-{{category.Category}}" role="tab" aria-controls="pills-{{category.Category}}" aria-selected="true">{{category.Category}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+            <div class="row py-2 mb-4 justify-content-center">
+                {% for video in video %}
+                <div class="col-md-6 p-3">
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{{video.Video_Link}}" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{video.Video_Name}}</h5>
+                                <p class="card-text"><small class="text-muted">{{video.Date}}</small> | <small class="text-muted">{{video.category}}</small></p>
+                                <hr />
+                                <p class="card-text">{{video.Description}}</p>
+                                <a class="btn btn-block btn-dark" href="{{video.Channel_Link}}"><img width="38" src="https://img.icons8.com/color/48/000000/youtube-play.png" /> {{video.Channel_Name}} Channel</a>
+                                <a class="btn btn-block btn-dark" href="{{video.Video_Link}}"><img width="38" src="https://img.icons8.com/color/48/000000/youtube-play.png" /> Watch Video</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% for category in category %}
+        <div class="tab-pane fade show" id="pills-{{category.Category}}" role="tabpanel" aria-labelledby="pills-{{category.Category}}-tab">
+            <div class="row py-2 mb-4 justify-content-center">
+                {% for video in video %} {% if video.category_id == category.id %}
+                <div class="col-md-6 p-3">
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{{video.Video_Link}}" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{video.Video_Name}}</h5>
+                                <p class="card-text"><small class="text-muted">{{video.Date}}</small> | <small class="text-muted">{{video.category}}</small></p>
+                                <hr />
+                                <p class="card-text">{{video.Description}}</p>
+                                <a class="btn btn-block btn-dark" href="{{video.Channel_Link}}"><img width="38" src="https://img.icons8.com/color/48/000000/youtube-play.png" /> {{video.Channel_Name}} Channel</a>
+                                <a class="btn btn-block btn-dark" href="{{video.Video_Link}}"><img width="38" src="https://img.icons8.com/color/48/000000/youtube-play.png" /> Watch Video</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %} {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
