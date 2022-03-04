@@ -1,1 +1,1 @@
-web: gunicorn FitnessStatus.wsgi
+web: gunicorn FItnessStatus.wsgi
